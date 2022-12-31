@@ -19,17 +19,13 @@ object TwoDimensionalTime:
       formatted(time, pattern).show()
 
   private def formatted(time: LocalDateTime, pattern: String): TwoDimensionalStr =
-    var result: TwoDimensionalStr = TwoDimensionalStr.Empty
-
-    oneDimensional(time, pattern) foreach {
-      timeDigit =>
+    oneDimensional(time, pattern).foldLeft(TwoDimensionalStr.Empty) {
+      (result, timeDigit) =>
         if (timeDigit == ':')
-          result += Stars
+          result + Stars
         else
-          result += TwoDimensionalDigit(timeDigit.toString.toInt)
+          result + TwoDimensionalDigit(timeDigit.toString.toInt)
     }
-
-    result
 
   private def oneDimensional(time: LocalDateTime, pattern: String): String =
     val formatter: DateTimeFormatter | Null = DateTimeFormatter.ofPattern(pattern)
