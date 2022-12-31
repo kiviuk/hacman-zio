@@ -6,6 +6,9 @@ import com.mobe.zioplayground.Core.SportsCar
 
 object Base:
   abstract class Car:
+
+    println("Car")
+
     def model: String
     def topSpeedInKmPerHour: Int
     def topAccelerationInRpm: Int

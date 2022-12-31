@@ -12,8 +12,8 @@ object Main:
     println("-" * 30)
 
   def code(args: Array[String]): Unit =
-    println(new Lambo("Murcileago"))
-    println(new BMW("M3 GTR"))
+//    println(new Lambo("Murcileago"))
+    println(new BMW("M3 GTR: 220 / 2 + 3 ="))
   end code
 end Main
 

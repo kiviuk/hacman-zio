@@ -7,15 +7,25 @@ object Core:
 
   class OrdinaryCar(override val model: String) extends Base.Car:
 
-    override def topSpeedInKmPerHour: Int = 220
+    println("OrdinaryCar")
 
-    override def topAccelerationInRpm: Int = 8000
+    override def topSpeedInKmPerHour: Int =
+      println("OrdinaryCar.topSpeedInKmPerHour = 220")
+      220
+
+    override def topAccelerationInRpm: Int =
+      println("OrdinaryCar.topAccelerationInRpm")
+      8000
   end OrdinaryCar
 
 
   class SportsCar(override val model: String) extends Base.Car:
 
-    override def topSpeedInKmPerHour: Int = 300
+    println("SportsCar")
+
+    override def topSpeedInKmPerHour: Int =
+      println("SportsCar.topSpeedInKmPerHour = 300")
+      300
 
     override def topAccelerationInRpm: Int = 11000
   end SportsCar
@@ -26,18 +36,28 @@ object Modification:
 
   trait Spoiler extends Car:
 
+    println("Spoiler")
+
     abstract override def topSpeedInKmPerHour: Int =
-      (super.topSpeedInKmPerHour * 1.02).toInt
+      println("Spoiler.topSpeedInKmPerHour / 2")
+      (super.topSpeedInKmPerHour / 2.0).toInt
 
   trait EngineControlUnit extends OrdinaryCar:
 
+    println("EngineControlUnit")
+
     override def topSpeedInKmPerHour: Int =
-      (super.topSpeedInKmPerHour * 1.5).toInt
+      println("EngineControlUnit.topSpeedInKmPerHour + 3")
+      (super.topSpeedInKmPerHour + 3.0).toInt
 
   trait TurboCharger extends OrdinaryCar:
 
+    println("TurboCharger")
+
     override def topAccelerationInRpm: Int =
+      println("TurboCharger.topAccelerationInRpm")
       (super.topAccelerationInRpm * 1.25).toInt
+
 end Modification
 
 final class Lambo(override val model: String)
@@ -46,8 +66,9 @@ final class Lambo(override val model: String)
 }
 
 final class BMW(override val model: String)
-  extends Core.OrdinaryCar(model)
+
+extends Core.OrdinaryCar(model)
     with Modification.Spoiler
     with Modification.EngineControlUnit
-    with Modification.TurboCharger {
-}
+    with Modification.TurboCharger:
+    println("Inheritance: BMW -> TurboCharger -> EngineControlUnit -> Spoiler -> OrdinaryCar -> Car -> AnyRef -> Any")
