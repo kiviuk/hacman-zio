@@ -25,6 +25,10 @@ addCommandAlias(
   "reload plugins; dependencyUpdates; reload return; dependencyUpdates",
 )
 
+addCommandAlias(
+  "testc", ";clean;coverage;test;coverageReport"
+)
+
 onLoadMessage +=
   s"""|
       |╭─────────────────────────────────╮

@@ -1,6 +1,7 @@
 import sbt._
 
 object Dependencies {
+
   object com {
     object eed3si9n {
       val expecty =
@@ -17,6 +18,11 @@ object Dependencies {
     object scalatestplus {
       val `scalacheck-1-16` =
         "org.scalatestplus" %% "scalacheck-1-16" % "3.2.14.0"
+    }
+
+    object scalameta {
+      val munit =
+        "org.scalameta" %% "munit" % "0.7.29"
     }
   }
 }

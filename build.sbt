@@ -45,11 +45,23 @@ lazy val commonSettings = {
 
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
-    "dev.zio" %% "zio" % "2.0.5"
+    "dev.zio" %% "zio" % "2.0.5",
+  ),
+  libraryDependencies ++= Seq(
+    "com.vladsch.flexmark" % "flexmark-all" % "0.64.0" % Test
   ),
   libraryDependencies ++= Seq(
     com.eed3si9n.expecty,
     org.scalatest.scalatest,
     org.scalatestplus.`scalacheck-1-16`,
+    org.scalameta.munit,
   ).map(_ % Test),
+)
+
+Test / publishArtifact := false
+Test / parallelExecution := false
+
+Test / testOptions ++= Seq(
+  Tests.Argument(TestFrameworks.ScalaTest, "-oSD"),
+  Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 )

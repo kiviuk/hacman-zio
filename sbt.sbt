@@ -28,3 +28,8 @@ ThisBuild / watchStartMessage := {
           |Monitoring source files for ${prompt(projectName)}...""".stripMargin
     }
 }
+
+ThisBuild / watchBeforeCommand := Watch.clearScreen
+ThisBuild / watchTriggeredMessage := Watch.clearScreenOnTrigger
+ThisBuild / watchForceTriggerOnAnyChange := true
+
