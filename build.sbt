@@ -9,6 +9,7 @@ ThisBuild / scalacOptions ++=
     "-explain",
     "-feature",
     "-language:implicitConversions",
+    "-Wunused:all",
     "-unchecked",
     "-Xfatal-warnings",
     "-Yexplicit-nulls", // experimental (I've seen it cause issues with circe)
@@ -65,3 +66,5 @@ Test / testOptions ++= Seq(
   Tests.Argument(TestFrameworks.ScalaTest, "-oSD"),
   Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 )
+
+console / initialCommands  := "import com.mobe.collections.*"
