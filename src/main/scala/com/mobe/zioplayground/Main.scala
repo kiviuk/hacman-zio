@@ -3,17 +3,7 @@ package zioplayground
 
 object Main:
 
-  trait NewType[Wrapped]:
 
-    opaque type Type = Wrapped
-
-    inline def apply(w: Wrapped): Type = w
-
-    extension (t: Type) inline def value: Wrapped = t
-
-    given(using CanEqual[Wrapped, Wrapped]): CanEqual[Type, Type] = CanEqual.derived
-
-  val number:Int = 42
 
   def main(args: Array[String]): Unit =
     println("-" * 60)
@@ -23,8 +13,41 @@ object Main:
 
   private def code(args: Array[String]): Unit =
 
-    import com.mobe.zioplayground.Main.NewType
+    def cps[X, ContRes](input: X)(cont: X => ContRes ): ContRes = cont(input)
 
-    println("Hi")
+    {
+      val f: Int = cps(5)(identity[Int])
+//      println(f)
+    }
+
+      val f = cps("7") { n =>
+        cps("5" + n) { n =>
+          cps("1" + n) { n =>
+            cps("0" + n) { n =>
+              identity(n)
+            }
+          }
+        }
+      }
+
+    println(f)
+
+    val numbers = List(1, 2, 3, 4, 5)
+
+    // for comprehension with yield
+    val doubledNumbers = for {
+      number <- numbers
+    } yield number * 2
+    // doubledNumbers will be List(2, 4, 6, 8, 10)
+
+    // for comprehension without yield
+    for {
+      number <- numbers
+    } {
+
+    }
+
+
+  end code
 
 end Main
