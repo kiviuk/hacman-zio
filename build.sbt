@@ -17,10 +17,10 @@ ThisBuild / scalacOptions ++=
     "-Ysafe-init", // experimental (I've seen it cause issues with circe)
   ) ++ Seq("-rewrite", "-indent") ++ Seq("-source", "future-migration")
 
-lazy val `zioplayground` =
+lazy val `hacman-zio` =
   project
     .in(file("."))
-    .settings(name := "zioplayground")
+    .settings(name := "hacman-zio")
     .settings(commonSettings)
     .settings(dependencies)
 
