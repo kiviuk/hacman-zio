@@ -46,10 +46,16 @@ lazy val commonSettings = {
 
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
-    "dev.zio" %% "zio" % "2.0.5",
+    "dev.zio" %% "zio" % "2.0.9",
+    "dev.zio" %% "zio-http" % "0.0.4",
   ),
   libraryDependencies ++= Seq(
     "com.vladsch.flexmark" % "flexmark-all" % "0.64.0" % Test
+  ),
+  libraryDependencies ++= Seq(
+    "dev.zio" %% "zio-test" % "2.0.9" % Test,
+    "dev.zio" %% "zio-test-sbt" % "2.0.9" % Test,
+    "dev.zio" %% "zio-test-magnolia" % "2.0.9" % Test
   ),
   libraryDependencies ++= Seq(
     com.eed3si9n.expecty,
@@ -58,6 +64,8 @@ lazy val dependencies = Seq(
     org.scalameta.munit,
   ).map(_ % Test),
 )
+
+testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
 
 Test / publishArtifact := false
 Test / parallelExecution := false
